@@ -10,6 +10,10 @@
             "type": "object",
             "additionalProperties": true,
             "properties": {
+                "@context": {
+                    "description": "The JSONLD @context of the metadata",
+                    "type": ["string", "object"]
+                },
                 "kernelspec": {
                     "description": "Kernel information.",
                     "type": "object",
@@ -60,13 +64,39 @@
                     "type": "integer",
                     "minimum": 1
                 },
-                "title": {
-                    "description": "The title of the notebook document",
+                "name": {
+                    "description": "The schema.org/name (title) of the notebook document",
                     "type": "string"
                 },
                 "author": {
-                    "description": "The author(s) of the notebook document",
-                    "type": "string"
+                    "description": "The schema.org/author(s) of the notebook document",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "@type": {"type": "string"},
+                            "name": {"type": "string"},
+                            "givenName": {"type": "string"},
+                            "familyName": {"type": "string"},
+                            "email": {"type": "email"},
+                            "url": {"type": "url"}
+                        },
+                        "additionalProperties": true
+                    }
+                },
+                "license": {
+                    "description": "The schema.org/license(s) of the notebook document with SPDX license key",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "@type": {"type": "string"},
+                            "name": {"type": "string"},
+                            "description": {"type": "string"},
+                            "url": {"type": "url"}
+                        },
+                        "additionalProperties": true
+                    }
                 }
             }
         },
